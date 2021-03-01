@@ -32,12 +32,14 @@ namespace Lab1
                 {
                     if (!Char.IsDigit(input[0]) && input[0] != '(' && input[0] != '+' && input[0] != '-' && input[0] != ',')
                     {
-                        inputCorrect = false;
+                        inputCorrect = false; 
+                        Console.WriteLine("Note the first symbol!");
                     }
 
                     if (!Char.IsDigit(input[input.Length - 1]) && input[input.Length - 1] != ')' && input[input.Length - 1] != ',')
                     {
                         inputCorrect = false;
+                        Console.WriteLine("Note the last symbol!");
                     }
 
                     int openBrackAmount = 0, closeBrackAmount = 0;
@@ -54,26 +56,37 @@ namespace Lab1
                             if (!Char.IsDigit(input[i]) && !Char.IsDigit(input[i + 1]) && input[i] != '(' && input[i + 1] != '(' && input[i] != ')' && input[i + 1] != ')' && input[i] != ',' && input[i + 1] != ',')
                             {
                                 inputCorrect = false;
+                                Console.WriteLine("Recurring operation signs(Exampe: 1++1, use: 1+(+1) )!");
                             }
 
                             if (input[i] == '(' && input[i + 1] == ')')
                             {
                                 inputCorrect = false;
+                                Console.WriteLine("Empty brackets!");
                             }
 
-                            if (input[i] == ',' && (input[i + 1] == ',' || input[i + 1] == '('))
+                            if ((input[i] == ',' || Char.IsDigit(input[i])) && input[i + 1] == '(')
                             {
                                 inputCorrect = false;
+                                Console.WriteLine("Operation sign probably missed!");
+                            }
+
+                            if (input[i] == ')' && (Char.IsDigit(input[i + 1]) || input[i + 1] == ','))
+                            {
+                                inputCorrect = false;
+                                Console.WriteLine("Operation sign probably missed!");
                             }
 
                             if (!Char.IsDigit(input[i]) && input[i] != ',' && input[i] != ')' && input[i + 1] == ')')
                             {
                                 inputCorrect = false;
+                                Console.WriteLine("Number probably missed!");
                             }
 
                             if (input[i] == '(' && (input[i + 1] == '*' || input[i + 1] == '/' || input[i + 1] == '^'))
                             {
                                 inputCorrect = false;
+                                Console.WriteLine("Number probably missed!");
                             }
                         }
 
@@ -121,11 +134,13 @@ namespace Lab1
                                 if (commaPos < symbolPos)
                                 {
                                     inputCorrect = false;
+                                    Console.WriteLine("Operation sign probably missed!");
                                 }
                             }
                             else if(comma)
                             {
                                 inputCorrect = false;
+                                Console.WriteLine("Operation sign probably missed!");
                             }
                         }
                     }
@@ -133,6 +148,7 @@ namespace Lab1
                     if (openBrackAmount != closeBrackAmount)
                     {
                         inputCorrect = false;
+                        Console.WriteLine("No opening or closing bracket!");
                     }
                 }
 
