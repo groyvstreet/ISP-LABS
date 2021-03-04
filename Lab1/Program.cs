@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1
 {
@@ -32,7 +28,7 @@ namespace Lab1
                 {
                     if (!Char.IsDigit(input[0]) && input[0] != '(' && input[0] != '+' && input[0] != '-' && input[0] != ',')
                     {
-                        inputCorrect = false; 
+                        inputCorrect = false;
                         Console.WriteLine("Note the first symbol!");
                     }
 
@@ -102,9 +98,9 @@ namespace Lab1
                         if (i < input.Length - 2 && !Char.IsDigit(input[i]) && input[i + 1] == ',' && !Char.IsDigit(input[i + 2]))
                         {
                             inputCorrect = false;
-                        } 
+                        }
 
-                        if(input[i] == ',')
+                        if (input[i] == ',')
                         {
                             bool symbol = false, comma = false;
                             int symbolPos = 0, commaPos = 0;
@@ -129,7 +125,7 @@ namespace Lab1
                                 }
                             }
 
-                            if(symbol && comma)
+                            if (symbol && comma)
                             {
                                 if (commaPos < symbolPos)
                                 {
@@ -137,7 +133,7 @@ namespace Lab1
                                     Console.WriteLine("Operation sign probably missed!");
                                 }
                             }
-                            else if(comma)
+                            else if (comma)
                             {
                                 inputCorrect = false;
                                 Console.WriteLine("Operation sign probably missed!");
@@ -270,7 +266,7 @@ namespace Lab1
                 }
             } // end of conversion to a reverse polish notation
 
-            bool calcu = true;
+            bool calcu = true, infinity = false;
             int index = 0, repeatPos;
 
             while (calcu) // begining of calculation of an expression
@@ -355,10 +351,24 @@ namespace Lab1
                     {
                         calcu = true;
                     }
+
+                    if (arrOperands[i] == (char)8734)
+                    {
+                        calcu = false;
+                        infinity = true;
+                        break;
+                    }
                 }
             } // end of calculation of an expression
 
-            Console.WriteLine("Result: " + double.Parse(arrOperands));
+            if (infinity)
+            {
+                Console.WriteLine("Infinity");
+            }
+            else
+            {
+                Console.WriteLine("Result: " + double.Parse(arrOperands));
+            }
         }
     }
 }
