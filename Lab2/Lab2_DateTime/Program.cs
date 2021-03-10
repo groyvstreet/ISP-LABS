@@ -28,8 +28,8 @@ namespace Lab2_DateTime
 
         static void Main(string[] args)
         {
-            DateTime now = DateTime.Now;
-            string format1 = now.ToString("F"), format2 = now.ToString("g");
+            DateTime date = DateTime.Now;
+            string format1 = date.ToString("F"), format2 = date.ToString("g");
 
             Console.WriteLine(format1);
             DigitsAmount(format1);

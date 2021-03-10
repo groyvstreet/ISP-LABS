@@ -7,7 +7,7 @@ namespace Lab2_int
         static void Main(string[] args)
         {
             bool inputCorrect;
-            ulong a, b = 0, multi = 1;
+            ulong a, b = 0;
             string strA, strB;
 
             do
@@ -36,42 +36,31 @@ namespace Lab2_int
 
                 if (inputCorrect)
                 {
-                    multi = 1;
-
-                    for (ulong i = a; i <= b; i++)
+                    if (a == 0)
                     {
-                        multi *= i;
-                    }
-
-                    if (multi == 0)
-                    {
-                        if (a > 0 && b > 0)
-                        {
-                            Console.WriteLine("Overlow!\n");
-                            inputCorrect = false;
-                        }
-                        else
-                        {
-                            Console.WriteLine("a * b is ZERO!\n");
-                            inputCorrect = false;
-                        }
+                        Console.WriteLine("Product of numbers is ZERO!\n");
+                        inputCorrect = false;
                     }
                 }
 
             } while (!inputCorrect);
 
-            int level = 0;
-            ulong divider = 1;
+            ulong level = 0;
+            --a;
 
-            while (multi % divider == 0)
+            while (a != 0)
             {
-                Console.WriteLine($"Level {level}: {multi} / {divider} = " + multi / divider + " + " + multi % divider);
-                divider *= 2;
-                level++;
+                a /= 2;
+                level -= a;
             }
 
-            Console.WriteLine($"Level {level}: {multi} / {divider} = " + multi / divider + " + " + multi % divider);
-            Console.WriteLine("Max level: " + --level);
+            while (b != 0)
+            {
+                b /= 2;
+                level += b;
+            }
+
+            Console.WriteLine("Max level: " + level);
         }
     }
 }
