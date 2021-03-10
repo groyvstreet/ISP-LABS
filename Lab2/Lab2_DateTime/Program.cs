@@ -4,7 +4,7 @@ namespace Lab2_DateTime
 {
     class Program
     {
-        static void DigitsAmount(string format)
+        static void DigitsAmount(string format) //digits amount computation
         {
             int index;
             int[] digits = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
