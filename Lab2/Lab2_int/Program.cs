@@ -9,7 +9,8 @@ namespace Lab2_int
             bool inputCorrect;
             ulong a, b = 0;
             string strA, strB;
-
+            
+            // user input check
             do
             {
                 Console.Write("Enter a: ");
@@ -44,23 +45,24 @@ namespace Lab2_int
                 }
 
             } while (!inputCorrect);
-
-            ulong level = 0;
+            
+            // degree computation
+            ulong degree = 0;
             --a;
 
             while (a != 0)
             {
                 a /= 2;
-                level -= a;
+                degree -= a;
             }
 
             while (b != 0)
             {
                 b /= 2;
-                level += b;
+                degree += b;
             }
 
-            Console.WriteLine("Max level: " + level);
+            Console.WriteLine("Max level: " + degree);
         }
     }
 }
