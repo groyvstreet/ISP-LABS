@@ -2,9 +2,25 @@
 
 namespace Lab3
 {
+    enum Weapons
+    {
+        MicroUzi,
+        Tec9,
+        MP5,
+        Colt45,
+        DesertEagle,
+        M4
+    }
+    enum BodyType
+    {
+        Thin,
+        Normal,
+        Fat
+    }
     class Human
     {
-        public static int Id { private set; get; }
+        private static int amount;
+        public int Id { private set; get; }
         private string sex;
         public string Sex
         {
@@ -61,107 +77,220 @@ namespace Lab3
                 return name;
             }
         }
-        private int age;
-        public int Age
+        public bool Dead { private set; get; }
+        private int armor;
+        public int Armor
         {
-            set
+            private set
             {
-                bool correct = true;
-
-                while (value <= 0 || correct == false)
+                if (value > 100)
                 {
-                    Console.WriteLine("Invalid input!\n");
-                    Console.Write("Enter age: ");
-                    correct = int.TryParse(Console.ReadLine(), out value);
+                    value = 100;
                 }
 
-                age = value;
+                if (value < 0)
+                {
+                    value = 0;
+                }
+
+                armor = value;
             }
             get
             {
-                return age;
+                return armor;
             }
         }
-        private float weight;
-        public float Weight
+        private int health;
+        public int Health
         {
-            set
+            private set
             {
-                bool correct = true;
-
-                while (value <= 0 || correct == false)
+                if(value > 100)
                 {
-                    Console.WriteLine("Invalid input!\n");
-                    Console.Write("Enter weight: ");
-                    correct = float.TryParse(Console.ReadLine(), out value);
+                    value = 100;
                 }
 
-                weight = value;
+                if(value < 0)
+                {
+                    value = 0;
+                    Dead = true;
+                }
+
+                health = value;
             }
             get
             {
-                return weight;
+                return health;
             }
         }
-        private float growth;
-        public float Growth
+        public int Money { private set; get; }
+        public BodyType Body { private set; get; }
+        private int fatIndex;
+        public int FatIndex
         {
-            set
+            private set
             {
-                bool correct = true;
-
-                while (value <= 0 || correct == false)
+                if (value > 100)
                 {
-                    Console.WriteLine("Invalid input!\n");
-                    Console.Write("Enter growth: ");
-                    correct = float.TryParse(Console.ReadLine(), out value);
+                    value = 100;
                 }
 
-                growth = value;
+                if (value < 0)
+                {
+                    value = 0;
+                }
+
+                if (value < 20)
+                {
+                    if (strength < 20)
+                    {
+                        Body = BodyType.Thin;
+                    }
+                    else
+                    {
+                        Body = BodyType.Normal;
+                    }
+                }
+                else
+                {
+                    if (strength < 20)
+                    {
+                        Body = BodyType.Fat;
+                    }
+                    else
+                    {
+                        Body = BodyType.Normal;
+                    }
+                }
+
+                fatIndex = value;
             }
             get
             {
-                return growth;
+                return fatIndex;
             }
         }
-        public float Balance { private set; get; }
-        public string Passport { private set; get; }
+        public bool HaveWeapon { private set; get; }
+        private Weapons weapon;
+        public Weapons Weapon
+        {
+            private set
+            {
+                HaveWeapon = true;
+                weapon = value;
+            }
+            get
+            {
+                return weapon;
+            }
+        }
+        public int Punch { private set; get; }
+        private int strength;
+        public int Strength
+        {
+            private set
+            {
+                if(value > 100)
+                {
+                    value = 100;
+                }
+
+                if(value < 5)
+                {
+                    value = 5;
+                }
+
+                if (fatIndex < 20)
+                {
+                    if (value < 20)
+                    {
+                        Body = BodyType.Thin;
+                    }
+                    else
+                    {
+                        Body = BodyType.Normal;
+                    }
+                }
+                else
+                {
+                    if (value < 20)
+                    {
+                        Body = BodyType.Fat;
+                    }
+                    else
+                    {
+                        Body = BodyType.Normal;
+                    }
+                }
+
+                strength = value;
+                Punch = strength / 5;
+            }
+            get
+            {
+                return strength;
+            }
+        }
         public string this[string prop]
         {
             get
             {
                 switch (prop)
                 {
-                    case "Id": return "Id - " + Id;
-                    case "Sex": return "Sex - " + sex;
-                    case "Name": return "Name - " + name;
-                    case "Passport": return Passport;
-                    case "Age": return "Age - " + age.ToString();
-                    case "Weight": return "Weight - " + weight.ToString();
-                    case "Growth": return "Growth - " + growth.ToString();
-                    case "Balance": return "Balance - " + Balance.ToString() + "$";
+                    case "Id": return Id.ToString();
+                    case "Sex": return sex;
+                    case "Name": return name;
+                    case "Health": return Health.ToString();
+                    case "Armor": return Armor.ToString();
+                    case "Money": return Money.ToString();
+                    case "Weapon":
+                        if (HaveWeapon)
+                        {
+                            switch (Weapon)
+                            {
+                                case Weapons.MicroUzi: return "Micro-Uzi";
+                                case Weapons.Tec9: return "Tec-9";
+                                case Weapons.MP5: return "MP5";
+                                case Weapons.Colt45: return "Colt45";
+                                case Weapons.DesertEagle: return "Desert Eagle";
+                                case Weapons.M4: return "M4";
+                                default: return null;
+                            }
+                        }
+                        else
+                        {
+                            return "No weapon";
+                        }
                     default: return null;
                 }
             }
         }
         public Human()
         {
-            Id++;
-            Balance = 15;
-            Passport = "Passport is absent!";
+            amount++;
+            Id = amount;
+            Health = 100;
+            Dead = false;
+            Armor = 0;
+            Money = 1000;
+            HaveWeapon = false;
+            FatIndex = 0;
+            Strength = 10;
             Fill();
             Console.WriteLine("Object is created!\n");
         }
-        public Human(string sex, string name, int age, float weight, float growth)
+        public Human(int armor, Weapons weapon)
         {
-            Id++;
-            Balance = 15;
-            Passport = "Passport is absent!";
-            Sex = sex;
-            Name = name;
-            Age = age;
-            Weight = weight;
-            Growth = growth;
+            amount++;
+            Id = amount;
+            Health = 100;
+            Dead = false;
+            Armor = armor;
+            Money = 1000;
+            Weapon = weapon;
+            FatIndex = 0;
+            Strength = 100;
+            Fill();
             Console.WriteLine("Object is created!\n");
         }
         public void Fill()
@@ -170,45 +299,123 @@ namespace Lab3
             Sex = Console.ReadLine();
             Console.Write("Enter name: ");
             Name = Console.ReadLine();
-            Console.Write("Enter age: ");
-            int.TryParse(Console.ReadLine(), out int num);
-            Age = num;
-            Console.Write("Enter weight: ");
-            float.TryParse(Console.ReadLine(), out float numf);
-            Weight = numf;
-            Console.Write("Enter growth: ");
-            float.TryParse(Console.ReadLine(), out numf);
-            Growth = numf;
         }
         public void Info()
         {
             Console.WriteLine("Id - " + Id);
             Console.WriteLine("Sex - " + Sex);
             Console.WriteLine("Name - " + Name);
-            Console.WriteLine("Age - " + Age);
-            Console.WriteLine("Weight - " + Weight);
-            Console.WriteLine("Growth - " + Growth);
-            Console.WriteLine("Balance - " + Balance + "$");
-            Console.WriteLine("Passport - " + Passport + "\n");
-        }
-        public void BuyPass()
-        {
-            if (Age >= 14)
+            Console.WriteLine("Health - " + Health);
+            Console.WriteLine("Armor - " + Armor);
+            Console.WriteLine("Strength - " + Strength);
+            Console.WriteLine("Fat - " + FatIndex);
+            Console.WriteLine("Body - " + Body);
+
+            if (HaveWeapon)
             {
-                if (Balance >= 10)
-                {
-                    Console.WriteLine("Passport is bought!(-10$)\n");
-                    Balance -= 10;
-                    Passport = "Passport is present!";
-                }
-                else
-                {
-                    Console.WriteLine("Not enough money!\n");
-                }
+                Console.WriteLine("Weapon - " + Weapon);
             }
             else
             {
-                Console.WriteLine("You are small!\n");
+                Console.WriteLine("No weapon");
+            }
+
+            Console.WriteLine("Money - " + Money + "$\n");
+        }
+        public void TakeWeapon(Weapons weapon)
+        {
+            HaveWeapon = true;
+            Weapon = weapon;
+        }
+        public void DropWeapon()
+        {
+            if (HaveWeapon)
+            {
+                HaveWeapon = false;
+            }
+            else
+            {
+                Console.WriteLine("No weapon!");
+            }
+        }
+        public void Eat()
+        {
+            if (Money >= 5)
+            {
+                FatIndex += 5;
+                Strength -= 1;
+                Health += 10;
+            }
+            else
+            {
+                Console.WriteLine("Not enough money!");
+            }
+        }
+        public void Gym()
+        {
+            if (Money >= 10)
+            {
+                Strength += 5;
+                FatIndex -= 5;
+            }
+            else
+            {
+                Console.WriteLine("Not enough money!");
+            }
+        }
+        public void Attack(Human target)
+        {
+            if (target.Dead)
+            {
+                Console.WriteLine("Target is dead!");
+            }
+            else
+            {
+                target.Health -= Punch;
+            }
+        }
+        public void Attack(Human target, Weapons weapon)
+        {
+            if (target.Dead)
+            {
+                Console.WriteLine("Target is dead!");
+            }
+            else
+            {
+                int damage = 0;
+
+                if (weapon == Weapons.Colt45)
+                {
+                    damage = 15;
+                }
+                else if (weapon == Weapons.DesertEagle)
+                {
+                    damage = 30;
+                }
+                else if (weapon == Weapons.M4)
+                {
+                    damage = 40;
+                }
+                else if (weapon == Weapons.MicroUzi)
+                {
+                    damage = 20;
+                }
+                else if (weapon == Weapons.MP5)
+                {
+                    damage = 30;
+                }
+                else if (weapon == Weapons.Tec9)
+                {
+                    damage = 17;
+                }
+
+                int temp = target.Armor - damage;
+                target.Armor -= damage;
+
+                if (temp < 0)
+                {
+                    target.Health += temp;
+                }
             }
         }
     }
@@ -218,50 +425,28 @@ namespace Lab3
         static void Main(string[] args)
         {
             Human human = new Human();
+            Human target = new Human(100, Weapons.DesertEagle);
 
             while(true)
             {
                 Console.WriteLine("1 - Create new");
                 Console.WriteLine("2 - Edit");
                 Console.WriteLine("3 - Info");
-                Console.WriteLine("4 - Buy passport");
+                Console.WriteLine("4 - Target info");
+                Console.WriteLine("5 - Take weapon");
+                Console.WriteLine("6 - Drop weapon");
+                Console.WriteLine("7 - Eat");
+                Console.WriteLine("8 - Go to the gym");
+                Console.WriteLine("9 - Attack target");
                 Console.WriteLine("0 - Exit");
                 string input = Console.ReadLine();
-                
-                if(input == "1")
+
+                if (input == "1")
                 {
                     Console.Clear();
-                    while(true)
-                    {
-                        Console.WriteLine("1 - Own");
-                        Console.WriteLine("2 - Template");
-                        Console.WriteLine("0 - Back");
-                        input = Console.ReadLine();
-
-                        if(input == "1")
-                        {
-                            Console.Clear();
-                            human = new Human();
-                            break;
-                        }
-                        else if (input == "2")
-                        {
-                            Console.Clear();
-                            human = new Human("Male", "Alex", 20, 75, 180);
-                            break;
-                        }
-                        else if (input == "0")
-                        {
-                            Console.Clear();
-                            break;
-                        }
-                        else
-                        {
-                            Console.Clear();
-                        }
-                    }
+                    human = new Human();
                 }
-                else if(input == "2")
+                else if (input == "2")
                 {
                     Console.Clear();
 
@@ -273,13 +458,13 @@ namespace Lab3
                         Console.WriteLine("0 - Back");
                         input = Console.ReadLine();
 
-                        if(input == "1")
+                        if (input == "1")
                         {
                             Console.Clear();
                             human.Fill();
                             Console.WriteLine("Saved!\n");
                         }
-                        else if(input == "2")
+                        else if (input == "2")
                         {
                             Console.Clear();
 
@@ -287,9 +472,6 @@ namespace Lab3
                             {
                                 Console.WriteLine("1 - Sex");
                                 Console.WriteLine("2 - Name");
-                                Console.WriteLine("3 - Age");
-                                Console.WriteLine("4 - Weight");
-                                Console.WriteLine("5 - Growth");
                                 Console.WriteLine("0 - Back");
                                 input = Console.ReadLine();
                                 Console.Clear();
@@ -308,30 +490,6 @@ namespace Lab3
                                     human.Name = input;
                                     Console.WriteLine("Saved!\n");
                                 }
-                                else if (input == "3")
-                                {
-                                    Console.Write("Enter new age: ");
-                                    input = Console.ReadLine();
-                                    int.TryParse(input, out int res);
-                                    human.Age = res;
-                                    Console.WriteLine("Saved!\n");
-                                }
-                                else if (input == "4")
-                                {
-                                    Console.Write("Enter new weight: ");
-                                    input = Console.ReadLine();
-                                    float.TryParse(input, out float res);
-                                    human.Weight = res;
-                                    Console.WriteLine("Saved!\n");
-                                }
-                                else if (input == "5")
-                                {
-                                    Console.Write("Enter new growth: ");
-                                    input = Console.ReadLine();
-                                    float.TryParse(input, out float res);
-                                    human.Growth = res;
-                                    Console.WriteLine("Saved!\n");
-                                }
                                 else if (input == "0")
                                 {
                                     Console.Clear();
@@ -343,7 +501,7 @@ namespace Lab3
                                 }
                             }
                         }
-                        else if(input == "0")
+                        else if (input == "0")
                         {
                             Console.Clear();
                             break;
@@ -354,118 +512,50 @@ namespace Lab3
                         }
                     }
                 }
-                else if(input == "3")
+                else if (input == "3")
+                {
+                    Console.Clear();
+                    human.Info();
+                }
+                else if(input == "4")
+                {
+                    Console.Clear();
+                    target.Info();
+                }
+                else if (input == "5")
+                {
+                    Console.Clear();
+                    human.TakeWeapon(Weapons.MP5);
+                }
+                else if (input == "6")
+                {
+                    Console.Clear();
+                    human.DropWeapon();
+                }
+                else if (input == "7")
+                {
+                    Console.Clear();
+                    human.Eat();
+                }
+                else if (input == "8")
+                {
+                    Console.Clear();
+                    human.Gym();
+                }
+                else if (input == "9")
                 {
                     Console.Clear();
 
-                    while (true)
+                    if (human.HaveWeapon)
                     {
-                        Console.WriteLine("Display: ");
-                        Console.WriteLine("1 - All info");
-                        Console.WriteLine("2 - Field");
-                        Console.WriteLine("0 - Back");
-                        input = Console.ReadLine();
-
-                        if(input == "1")
-                        {
-                            Console.Clear();
-                            human.Info();
-                            break;
-                        }
-                        else if(input == "2")
-                        {
-                            Console.Clear();
-
-                            while (true)
-                            {
-                                Console.WriteLine("1 - Id");
-                                Console.WriteLine("2 - Sex");
-                                Console.WriteLine("3 - Name");
-                                Console.WriteLine("4 - Age");
-                                Console.WriteLine("5 - Weight");
-                                Console.WriteLine("6 - Growth");
-                                Console.WriteLine("7 - Balance");
-                                Console.WriteLine("8 - Passport");
-                                Console.WriteLine("0 - Back");
-                                input = Console.ReadLine();
-
-                                if (input == "1")
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine(human["Id"]);
-                                    Console.WriteLine();
-                                }
-                                else if (input == "2")
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine(human["Sex"]);
-                                    Console.WriteLine();
-                                }
-                                else if (input == "3")
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine(human["Name"]);
-                                    Console.WriteLine();
-                                }
-                                else if (input == "4")
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine(human["Age"]);
-                                    Console.WriteLine();
-                                }
-                                else if (input == "5")
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine(human["Weight"]);
-                                    Console.WriteLine();
-                                }
-                                else if (input == "6")
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine(human["Growth"]);
-                                    Console.WriteLine();
-                                }
-                                else if (input == "7")
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine(human["Balance"]);
-                                    Console.WriteLine();
-                                }
-                                else if (input == "8")
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine(human["Passport"]);
-                                    Console.WriteLine();
-                                }
-                                else if (input == "0")
-                                {
-                                    Console.Clear();
-                                    break;
-                                }
-                                else
-                                {
-                                    Console.Clear();
-                                }
-                            }
-
-                        }
-                        else if(input == "0")
-                        {
-                            Console.Clear();
-                            break;
-                        }
-                        else
-                        {
-                            Console.Clear();
-                        }
+                        human.Attack(target, human.Weapon);
+                    }
+                    else
+                    {
+                        human.Attack(target);
                     }
                 }
-                else if (input == "4")
-                {
-                    Console.Clear();
-                    human.BuyPass();
-                }
-                else if(input == "0")
+                else if (input == "0")
                 {
                     Console.Clear();
                     Console.WriteLine("Program is finished...");
