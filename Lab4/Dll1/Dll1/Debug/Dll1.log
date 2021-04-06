@@ -1,0 +1,25 @@
+﻿D:\MVS\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: промежуточный каталог (Debug\) содержит файлы, которые используются совместно с другим проектом (Dll1.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  pch.cpp
+  dllmain.cpp
+  math.cpp
+D:\LABS\ISP\Dll1\Dll1\math.cpp(4,1): warning C4273: Module: несовместимое связывание dll
+D:\LABS\ISP\Dll1\Dll1\math.h(9,35): message : см. предыдущее определение "Module"
+D:\LABS\ISP\Dll1\Dll1\math.cpp(16,1): warning C4273: ModuleD: несовместимое связывание dll
+D:\LABS\ISP\Dll1\Dll1\math.h(10,38): message : см. предыдущее определение "ModuleD"
+D:\LABS\ISP\Dll1\Dll1\math.cpp(28,1): warning C4273: Max: несовместимое связывание dll
+D:\LABS\ISP\Dll1\Dll1\math.h(11,35): message : см. предыдущее определение "Max"
+D:\LABS\ISP\Dll1\Dll1\math.cpp(40,1): warning C4273: Min: несовместимое связывание dll
+D:\LABS\ISP\Dll1\Dll1\math.h(12,35): message : см. предыдущее определение "Min"
+D:\LABS\ISP\Dll1\Dll1\math.cpp(52,1): warning C4273: Pow: несовместимое связывание dll
+D:\LABS\ISP\Dll1\Dll1\math.h(13,35): message : см. предыдущее определение "Pow"
+D:\LABS\ISP\Dll1\Dll1\math.cpp(64,1): warning C4273: Sin: несовместимое связывание dll
+D:\LABS\ISP\Dll1\Dll1\math.h(14,36): message : см. предыдущее определение "Sin"
+D:\LABS\ISP\Dll1\Dll1\math.cpp(81,1): warning C4273: Cos: несовместимое связывание dll
+D:\LABS\ISP\Dll1\Dll1\math.h(15,36): message : см. предыдущее определение "Cos"
+D:\LABS\ISP\Dll1\Dll1\math.cpp(98,1): warning C4273: Tg: несовместимое связывание dll
+D:\LABS\ISP\Dll1\Dll1\math.h(16,36): message : см. предыдущее определение "Tg"
+D:\LABS\ISP\Dll1\Dll1\math.cpp(110,1): warning C4273: Ctg: несовместимое связывание dll
+D:\LABS\ISP\Dll1\Dll1\math.h(17,36): message : см. предыдущее определение "Ctg"
+  Создание кода...
+     Создается библиотека D:\LABS\ISP\Dll1\Debug\dllmath.lib и объект D:\LABS\ISP\Dll1\Debug\dllmath.exp
+  Dll1.vcxproj -> D:\LABS\ISP\Dll1\Debug\dllmath.dll
