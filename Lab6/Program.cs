@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lab5
+namespace Lab6
 {
     class Program
     {
