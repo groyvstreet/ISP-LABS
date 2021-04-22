@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lab5
+namespace Lab6
 {
     enum Gangs
     {
