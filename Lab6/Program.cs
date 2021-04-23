@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lab6
+namespace Lab5
 {
     class Program
     {
@@ -102,7 +102,7 @@ namespace Lab6
                                     gSave = people[0].Clone() as Human;
                                     break;
                                 case "13":
-                                    people[0] = gSave;
+                                    people[0] = gSave.Clone() as Human;
                                     break;
                                 case "0":
                                     run = false;
@@ -169,7 +169,7 @@ namespace Lab6
                                     pSave = people[1].Clone() as Human;
                                     break;
                                 case "10":
-                                    people[1] = pSave;
+                                    people[1] = pSave.Clone() as Human;
                                     break;
                                 case "0":
                                     run = false;
@@ -228,7 +228,7 @@ namespace Lab6
                                     dSave = people[2].Clone() as Human;
                                     break;
                                 case "8":
-                                    people[2] = dSave;
+                                    people[2] = dSave.Clone() as Human;
                                     break;
                                 case "0":
                                     run = false;
