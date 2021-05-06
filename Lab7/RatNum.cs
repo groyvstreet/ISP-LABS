@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab7
 {
@@ -42,10 +39,7 @@ namespace Lab7
             return a;
         }
 
-        private static int LCM(int a, int b)
-        {
-            return a * b / GCD(a, b);
-        }
+        private static int LCM(int a, int b) => a * b / GCD(a, b);
 
         public static RationalNumber operator +(RationalNumber n1, RationalNumber n2)
         {
@@ -100,20 +94,9 @@ namespace Lab7
             return n1.Numerator * lcm / n1.Denominator != n2.Numerator * lcm / n2.Denominator;
         }
 
-        public override string ToString()
-        {
-            return Numerator.ToString() + "/" + Denominator.ToString();
-        }
+        public override string ToString() => Numerator.ToString() + "/" + Denominator.ToString();
 
-        public string ToString(string format)
-        {
-            if(format == ".")
-            {
-                return ((double)Numerator / Denominator).ToString();
-            }
-
-            return "";
-        }
+        public string ToString(string format) => format == "." ? ((double)Numerator / Denominator).ToString() : "";
 
         public static RationalNumber Parse(string str)
         {
@@ -133,30 +116,15 @@ namespace Lab7
             }
         }
 
-        public static implicit operator short(RationalNumber n)
-        {
-            return (short)(n.Numerator / n.Denominator);
-        }
+        public static implicit operator short(RationalNumber n) => (short)(n.Numerator / n.Denominator);
 
-        public static implicit operator int(RationalNumber n)
-        {
-            return n.Numerator / n.Denominator;
-        }
+        public static implicit operator int(RationalNumber n) => n.Numerator / n.Denominator;
 
-        public static implicit operator long(RationalNumber n)
-        {
-            return n.Numerator / n.Denominator;
-        }
+        public static implicit operator long(RationalNumber n) => n.Numerator / n.Denominator;
 
-        public static implicit operator float(RationalNumber n)
-        {
-            return (float)n.Numerator / n.Denominator;
-        }
+        public static implicit operator float(RationalNumber n) => (float)n.Numerator / n.Denominator;
 
-        public static implicit operator double(RationalNumber n)
-        {
-            return (double)n.Numerator / n.Denominator;
-        }
+        public static implicit operator double(RationalNumber n) => (double)n.Numerator / n.Denominator;
 
         public void Reduce()
         {
@@ -165,9 +133,6 @@ namespace Lab7
             Denominator /= gcd;
         }
 
-        public int CompareTo(RationalNumber other)
-        {
-            return this == other ? 0 : (this > other ? 1 : -1);
-        }
+        public int CompareTo(RationalNumber other) => this == other ? 0 : (this > other ? 1 : -1);
     }
 }
