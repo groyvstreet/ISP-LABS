@@ -72,41 +72,51 @@ namespace Lab8
                                 case "1":
                                     people[0].ShowMessage(people[0].Info);
                                     break;
+                                    
                                 case "2":
                                     people[0].TakeWeapon(Weapons.MicroUzi);
                                     break;
+                                    
                                 case "3":
                                     people[0].DropWeapon();
                                     break;
+                                    
                                 case "4":
                                     people[0].BuyArmor();
                                     break;
+                                    
                                 case "5":
                                     people[0].Eat();
                                     break;
+                                    
                                 case "6":
                                     people[0].Gym();
                                     break;
+                                    
                                 case "7":
                                     Gangster temp = (Gangster)people[0];
                                     temp.TheftAuto();
                                     people[0] = temp;
                                     break;
+                                    
                                 case "8":
                                     temp = (Gangster)people[0];
                                     temp.RobShop();
                                     people[0] = temp;
                                     break;
+                                    
                                 case "9":
                                     temp = (Gangster)people[0];
                                     temp.PaintGraffiti();
                                     people[0] = temp;
                                     break;
+                                    
                                 case "10":
                                     temp = (Gangster)people[0];
                                     temp.BuySpray();
                                     people[0] = temp;
                                     break;
+                                    
                                 case "11":
                                     temp = (Gangster)people[0];
                                     Police temp2 = (Police)people[1];
@@ -114,12 +124,15 @@ namespace Lab8
                                     people[0] = temp;
                                     people[1] = temp2;
                                     break;
+                                    
                                 case "12":
                                     gSave = people[0].Clone() as Human;
                                     break;
+                                    
                                 case "13":
                                     people[0] = gSave.Clone() as Human;
                                     break;
+                                    
                                 case "0":
                                     progExecution = false;
                                     break;
@@ -152,21 +165,27 @@ namespace Lab8
                                 case "1":
                                     people[1].ShowMessage(people[1].Info);
                                     break;
+                                    
                                 case "2":
                                     people[1].TakeWeapon(Weapons.MP5);
                                     break;
+                                    
                                 case "3":
                                     people[1].DropWeapon();
                                     break;
+                                    
                                 case "4":
                                     people[1].BuyArmor();
                                     break;
+                                    
                                 case "5":
                                     people[1].Eat();
                                     break;
+                                    
                                 case "6":
                                     people[1].Gym();
                                     break;
+                                    
                                 case "7":
                                     Police temp = (Police)people[1];
                                     Gangster temp2 = (Gangster)people[0];
@@ -174,6 +193,7 @@ namespace Lab8
                                     people[1] = temp;
                                     people[0] = temp2;
                                     break;
+                                    
                                 case "8":
                                     temp = (Police)people[1];
                                     temp2 = (Gangster)people[0];
@@ -181,12 +201,15 @@ namespace Lab8
                                     people[1] = temp;
                                     people[0] = temp2;
                                     break;
+                                    
                                 case "9":
                                     pSave = people[1].Clone() as Human;
                                     break;
+                                    
                                 case "10":
                                     people[1] = pSave.Clone() as Human;
                                     break;
+                                    
                                 case "0":
                                     progExecution = false;
                                     break;
@@ -217,15 +240,19 @@ namespace Lab8
                                 case "1":
                                     people[2].ShowMessage(people[2].Info);
                                     break;
+                                    
                                 case "2":
                                     people[2].BuyArmor();
                                     break;
+                                    
                                 case "3":
                                     people[2].Eat();
                                     break;
+                                    
                                 case "4":
                                     people[2].Gym();
                                     break;
+                                    
                                 case "5":
                                     Doctor temp = (Doctor)people[2];
                                     Gangster temp2 = (Gangster)people[0];
@@ -233,6 +260,7 @@ namespace Lab8
                                     people[2] = temp;
                                     people[0] = temp2;
                                     break;
+                                    
                                 case "6":
                                     temp = (Doctor)people[2];
                                     Police temp3 = (Police)people[1];
@@ -240,12 +268,15 @@ namespace Lab8
                                     people[2] = temp;
                                     people[1] = temp3;
                                     break;
+                                    
                                 case "7":
                                     dSave = people[2].Clone() as Human;
                                     break;
+                                    
                                 case "8":
                                     people[2] = dSave.Clone() as Human;
                                     break;
+                                    
                                 case "0":
                                     progExecution = false;
                                     break;
