@@ -275,54 +275,89 @@ namespace Lab8
 
         public void TakeWeapon(Weapons weapon)
         {
-            HaveWeapon = true;
-            Weapon = weapon;
+            if (!Dead)
+            {
+                HaveWeapon = true;
+                Weapon = weapon;
+            }
+            else
+            {
+                Console.WriteLine(Name + " is dead!");
+            }
         }
 
         public void DropWeapon()
         {
-            HaveWeapon = false;
+            if (!Dead)
+            {
+                HaveWeapon = false;
+            }
+            else
+            {
+                Console.WriteLine(Name + " is dead!");
+            }
         }
 
         public void BuyArmor()
         {
-            if (Money >= 100)
+            if (!Dead)
             {
-                Money -= 100;
-                Armor = 100;
+                if (Money >= 100)
+                {
+                    Money -= 100;
+                    Armor = 100;
+                }
+                else
+                {
+                    Console.WriteLine("Not enough money!");
+                }
             }
             else
             {
-                Console.WriteLine("Not enough money!");
+                Console.WriteLine(Name + " is dead!");
             }
         }
 
         public void Eat()
         {
-            if (Money >= 5)
+            if (!Dead)
             {
-                Money -= 5;
-                FatIndex += 5;
-                Strength -= 1;
-                Health += 10;
+                if (Money >= 5)
+                {
+                    Money -= 5;
+                    FatIndex += 5;
+                    Strength -= 1;
+                    Health += 10;
+                }
+                else
+                {
+                    Console.WriteLine("Not enough money!");
+                }
             }
             else
             {
-                Console.WriteLine("Not enough money!");
+                Console.WriteLine(Name + " is dead!");
             }
         }
 
         public void Gym()
         {
-            if (Money >= 10)
+            if (!Dead)
             {
-                Money -= 10;
-                Strength += 5;
-                FatIndex -= 5;
+                if (Money >= 10)
+                {
+                    Money -= 10;
+                    Strength += 5;
+                    FatIndex -= 5;
+                }
+                else
+                {
+                    Console.WriteLine("Not enough money!");
+                }
             }
             else
             {
-                Console.WriteLine("Not enough money!");
+                Console.WriteLine(Name + " is dead!");
             }
         }
 

@@ -254,42 +254,70 @@ namespace Lab8
 
         public void TheftAuto()
         {
-            Respect += 2;
-            Money += 300;
-            Wanted += 1;
-            OnTheft?.Invoke();
+            if (!Dead)
+            {
+                Respect += 2;
+                Money += 300;
+                Wanted += 1;
+                OnTheft?.Invoke();
+            }
+            else
+            {
+                Console.WriteLine(Name + " is dead!");
+            }
         }
 
         public void RobShop()
         {
-            Respect += 1;
-            Money += 85;
-            Wanted += 1;
+            if (!Dead)
+            {
+                Respect += 1;
+                Money += 85;
+                Wanted += 1;
+            }
+            else
+            {
+                Console.WriteLine(Name + " is dead!");
+            }
         }
 
         public void PaintGraffiti()
         {
-            if (sprayPaint > 0)
+            if (!Dead)
             {
-                SprayPaint--;
-                Respect += 4;
+                if (sprayPaint > 0)
+                {
+                    SprayPaint--;
+                    Respect += 4;
+                }
+                else
+                {
+                    Console.WriteLine("Spray is empty!");
+                }
             }
             else
             {
-                Console.WriteLine("Spray is empty!");
+                Console.WriteLine(Name + " is dead!");
             }
         }
 
         public void BuySpray()
         {
-            if (Money >= 15)
+            if (!Dead)
             {
-                Money -= 15;
-                SprayPaint += 100;
+                if (Money >= 15)
+                {
+                    Money -= 15;
+                    SprayPaint += 100;
+                }
+                else
+                {
+                    Console.WriteLine("Not enough money!");
+                }
             }
             else
             {
-                Console.WriteLine("Not enough money!");
+                Console.WriteLine(Name + " is dead!");
             }
         }
 
@@ -310,162 +338,183 @@ namespace Lab8
 
         public void Attack(Gangster target)
         {
-            if (target.Dead)
+            if (!Dead)
             {
-                Console.WriteLine("Target is dead!");
+                if (target.Dead)
+                {
+                    Console.WriteLine("Target is dead!");
+                }
+                else
+                {
+                    target.Health -= Punch;
+
+                    if (target.Dead)
+                    {
+                        Money += target.Money;
+                        Console.WriteLine($"{this["Name"]} killed {target["Name"]}!");
+                        Console.WriteLine($"{this["Name"]} +{target.Money}$");
+
+                        if (Gang == target.Gang)
+                        {
+                            Respect -= 8;
+                        }
+                        else
+                        {
+                            Respect += 6;
+                        }
+                    }
+                }
             }
             else
             {
-                target.Health -= Punch;
-
-                if (target.Dead)
-                {
-                    Money += target.Money;
-                    Console.WriteLine($"{this["Name"]} killed {target["Name"]}!");
-                    Console.WriteLine($"{this["Name"]} +{target.Money}$");
-
-                    if (Gang == target.Gang)
-                    {
-                        Respect -= 8;
-                    }
-                    else
-                    {
-                        Respect += 6;
-                    }
-                }
+                Console.WriteLine(Name + " is dead!");
             }
         }
 
         public void Attack(Gangster target, Weapons weapon)
         {
-            if (target.Dead)
+            if (!Dead)
             {
-                Console.WriteLine($"{target["Name"]} is dead!");
+                if (target.Dead)
+                {
+                    Console.WriteLine($"{target["Name"]} is dead!");
+                }
+                else
+                {
+                    int damage = 0;
+
+                    if (weapon == Weapons.Colt45)
+                    {
+                        damage = 15;
+                    }
+                    else if (weapon == Weapons.DesertEagle)
+                    {
+                        damage = 30;
+                    }
+                    else if (weapon == Weapons.M4)
+                    {
+                        damage = 40;
+                    }
+                    else if (weapon == Weapons.MicroUzi)
+                    {
+                        damage = 20;
+                    }
+                    else if (weapon == Weapons.MP5)
+                    {
+                        damage = 30;
+                    }
+                    else if (weapon == Weapons.Tec9)
+                    {
+                        damage = 17;
+                    }
+
+                    int temp = target.Armor - damage;
+                    target.Armor -= damage;
+
+                    if (temp < 0)
+                    {
+                        target.Health += temp;
+                    }
+
+                    if (target.Dead)
+                    {
+                        Money += target.Money;
+                        Console.WriteLine($"{this["Name"]} killed {target["Name"]}!");
+                        Console.WriteLine($"{this["Name"]} +{target.Money}$");
+
+                        if (Gang == target.Gang)
+                        {
+                            Respect -= 8;
+                        }
+                        else
+                        {
+                            Respect += 6;
+                        }
+                    }
+                }
             }
             else
             {
-                int damage = 0;
-
-                if (weapon == Weapons.Colt45)
-                {
-                    damage = 15;
-                }
-                else if (weapon == Weapons.DesertEagle)
-                {
-                    damage = 30;
-                }
-                else if (weapon == Weapons.M4)
-                {
-                    damage = 40;
-                }
-                else if (weapon == Weapons.MicroUzi)
-                {
-                    damage = 20;
-                }
-                else if (weapon == Weapons.MP5)
-                {
-                    damage = 30;
-                }
-                else if (weapon == Weapons.Tec9)
-                {
-                    damage = 17;
-                }
-
-                int temp = target.Armor - damage;
-                target.Armor -= damage;
-
-                if (temp < 0)
-                {
-                    target.Health += temp;
-                }
-
-                if (target.Dead)
-                {
-                    Money += target.Money;
-                    Console.WriteLine($"{this["Name"]} killed {target["Name"]}!");
-                    Console.WriteLine($"{this["Name"]} +{target.Money}$");
-
-                    if (Gang == target.Gang)
-                    {
-                        Respect -= 8;
-                    }
-                    else
-                    {
-                        Respect += 6;
-                    }
-                }
+                Console.WriteLine(Name + " is dead!");
             }
         }
 
         public void Attack(Police target, Weapons weapon)
         {
-            if (target.Dead)
+            if (!Dead)
             {
-                Console.WriteLine($"{target["Name"]} is dead!");
+                if (target.Dead)
+                {
+                    Console.WriteLine($"{target["Name"]} is dead!");
+                }
+                else
+                {
+                    int damage = 0;
+
+                    if (weapon == Weapons.Colt45)
+                    {
+                        damage = 15;
+                    }
+                    else if (weapon == Weapons.DesertEagle)
+                    {
+                        damage = 30;
+                    }
+                    else if (weapon == Weapons.M4)
+                    {
+                        damage = 40;
+                    }
+                    else if (weapon == Weapons.MicroUzi)
+                    {
+                        damage = 20;
+                    }
+                    else if (weapon == Weapons.MP5)
+                    {
+                        damage = 30;
+                    }
+                    else if (weapon == Weapons.Tec9)
+                    {
+                        damage = 17;
+                    }
+
+                    int temp = target.Armor - damage;
+                    target.AddArmor(-damage);
+
+                    if (temp < 0)
+                    {
+                        target.AddHealth(temp);
+                    }
+
+                    if (target.Dead)
+                    {
+                        Money += target.Money;
+                        Console.WriteLine($"{this["Name"]} killed {target["Name"]}!");
+                        Console.WriteLine($"{this["Name"]} +{target.Money}$");
+
+                        if (target.Rank == Ranks.OP)
+                        {
+                            Respect += 2;
+                        }
+
+                        if (target.Rank == Ranks.OP)
+                        {
+                            Respect += 4;
+                        }
+
+                        if (target.Rank == Ranks.OP)
+                        {
+                            Respect += 6;
+                        }
+
+                        if (target.Rank == Ranks.OP)
+                        {
+                            Respect += 8;
+                        }
+                    }
+                }
             }
             else
             {
-                int damage = 0;
-
-                if (weapon == Weapons.Colt45)
-                {
-                    damage = 15;
-                }
-                else if (weapon == Weapons.DesertEagle)
-                {
-                    damage = 30;
-                }
-                else if (weapon == Weapons.M4)
-                {
-                    damage = 40;
-                }
-                else if (weapon == Weapons.MicroUzi)
-                {
-                    damage = 20;
-                }
-                else if (weapon == Weapons.MP5)
-                {
-                    damage = 30;
-                }
-                else if (weapon == Weapons.Tec9)
-                {
-                    damage = 17;
-                }
-
-                int temp = target.Armor - damage;
-                target.AddArmor(-damage);
-
-                if (temp < 0)
-                {
-                    target.AddHealth(temp);
-                }
-
-                if (target.Dead)
-                {
-                    Money += target.Money;
-                    Console.WriteLine($"{this["Name"]} killed {target["Name"]}!");
-                    Console.WriteLine($"{this["Name"]} +{target.Money}$");
-
-                    if (target.Rank == Ranks.OP)
-                    {
-                        Respect += 2;
-                    }
-
-                    if (target.Rank == Ranks.OP)
-                    {
-                        Respect += 4;
-                    }
-
-                    if (target.Rank == Ranks.OP)
-                    {
-                        Respect += 6;
-                    }
-
-                    if (target.Rank == Ranks.OP)
-                    {
-                        Respect += 8;
-                    }
-                }
+                Console.WriteLine(Name + " is dead!");
             }
         }
     }

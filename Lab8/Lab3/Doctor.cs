@@ -82,72 +82,93 @@ namespace Lab8
 
         public void Heal(Gangster gangster)
         {
-            if (Status == Statuses.Assistant)
+            if (!Dead)
             {
-                gangster.AddHealth(20);
-                Money += 25;
-            }
+                if (Status == Statuses.Assistant)
+                {
+                    gangster.AddHealth(20);
+                    Money += 25;
+                }
 
-            if (Status == Statuses.Junior)
+                if (Status == Statuses.Junior)
+                {
+                    gangster.AddHealth(40);
+                    Money += 40;
+                }
+
+                if (Status == Statuses.Senior)
+                {
+                    gangster.AddHealth(60);
+                    Money += 55;
+                }
+
+                Merit += 3;
+                OnHeal?.Invoke();
+            }
+            else
             {
-                gangster.AddHealth(40);
-                Money += 40;
+                Console.WriteLine(Name + " is dead!");
             }
-
-            if (Status == Statuses.Senior)
-            {
-                gangster.AddHealth(60);
-                Money += 55;
-            }
-
-            Merit += 3;
-            OnHeal?.Invoke();
         }
 
         public void Heal(Police police)
         {
-            if (Status == Statuses.Assistant)
+            if (!Dead)
             {
-                police.AddHealth(20);
-                Money += 120;
-            }
+                if (Status == Statuses.Assistant)
+                {
+                    police.AddHealth(20);
+                    Money += 120;
+                }
 
-            if (Status == Statuses.Junior)
+                if (Status == Statuses.Junior)
+                {
+                    police.AddHealth(40);
+                    Money += 160;
+                }
+
+                if (Status == Statuses.Senior)
+                {
+                    police.AddHealth(60);
+                    Money += 200;
+                }
+
+                Merit += 6;
+            }
+            else
             {
-                police.AddHealth(40);
-                Money += 160;
+                Console.WriteLine(Name + " is dead!");
             }
-
-            if (Status == Statuses.Senior)
-            {
-                police.AddHealth(60);
-                Money += 200;
-            }
-
-            Merit += 6;
         }
 
         public void Heal(Doctor doctor)
         {
-            if (Status == Statuses.Assistant)
+            if (!Dead)
             {
-                doctor.Health += 20;
-                Money += 100;
-            }
+                if (Status == Statuses.Assistant)
+                {
+                    doctor.Health += 20;
+                    Money += 100;
+                }
 
-            if (Status == Statuses.Junior)
+                if (Status == Statuses.Junior)
+                {
+                    doctor.Health += 40;
+                    Money += 125;
+                }
+
+                if (Status == Statuses.Senior)
+                {
+                    doctor.Health += 60;
+                    Money += 150;
+                }
+
+                Merit += 5;
+            }
+            else
             {
-                doctor.Health += 40;
-                Money += 125;
+                Console.WriteLine(Name + " is dead!");
             }
-
-            if (Status == Statuses.Senior)
-            {
-                doctor.Health += 60;
-                Money += 150;
-            }
-
-            Merit += 5;
         }
 
         public override void Info()
